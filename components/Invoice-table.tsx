@@ -17,7 +17,29 @@ import { toast } from "sonner";
 import Alert from "./Alert";
 import InvoicePdfButton from "./invoice-pdf";
 
-export default function InvoiceTable({ data }: {data: any[] | undefined}) {
+type InvoiceType = [
+  {
+    id: string;
+    invoiceId: string;
+    status: string;
+    createdAt: Date;
+    dueDate: Date;
+    billerName: string;
+    billerEmail: string;
+    billerAddress: string;
+    clientName: string;
+    clientEmail: string;
+    clientAddress: string;
+    description: string;
+    price: number;
+    quantity: number;
+    total: number;
+  }
+]
+
+export default function InvoiceTable({ data }: {data: InvoiceType}) {
+
+  console.log(data)
 
   const [isPending, startTransition] = useTransition();
 
@@ -34,7 +56,7 @@ export default function InvoiceTable({ data }: {data: any[] | undefined}) {
     });
   };
 
-  if (data?.length === 0) {
+  if (data?.length < 1) {
     return (
       <div className="h-auto w-full p-6 rounded bg-white dark:bg-card">
         <Alert />
