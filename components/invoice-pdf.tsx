@@ -8,7 +8,9 @@ interface InvoiceType {
   invoiceId: string;
   status: string;
   createdAt: Date;
-  dueDate: Date;
+  dueDate: Date | null;
+  updatedAt: Date | null;
+  userId: string | null;
   billerName: string;
   billerEmail: string;
   billerAddress: string;

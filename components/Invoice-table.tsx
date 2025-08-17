@@ -22,7 +22,9 @@ type InvoiceType = {
   invoiceId: string;
   status: string;
   createdAt: Date;
-  dueDate: Date;
+  dueDate: Date | null;
+  updatedAt: Date | null;
+  userId: string | null;
   billerName: string;
   billerEmail: string;
   billerAddress: string;
@@ -33,7 +35,7 @@ type InvoiceType = {
   price: number;
   quantity: number;
   total: number;
-}[]
+}[] | undefined
 
 export default function InvoiceTable({ data }: {data: InvoiceType}) {
 
@@ -54,7 +56,7 @@ export default function InvoiceTable({ data }: {data: InvoiceType}) {
     });
   };
 
-  if (data?.length < 1) {
+  if (data?.length === 0) {
     return (
       <div className="h-auto w-full p-6 rounded bg-white dark:bg-card">
         <Alert />
@@ -104,7 +106,9 @@ export default function InvoiceTable({ data }: {data: InvoiceType}) {
             </TableCell>
             <TableCell className="font-text font-medium text-center">
               {
-                format(new Date(invoice.dueDate), 'dd MMM yyyy')
+                invoice?.dueDate
+                ? format(new Date(invoice.dueDate), 'dd MMM yyyy')
+                : 'N/A'
               }
             </TableCell>
             <TableCell className="text-center">
