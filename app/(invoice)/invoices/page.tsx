@@ -54,7 +54,7 @@ export default async function Invoices({
           </div>
         </div>
         <InvoiceFilter />
-        <InvoiceTable data={data ?? []} />
+        <InvoiceTable data={data} />
       </div>
     </div>
   )
