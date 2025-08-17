@@ -38,14 +38,14 @@ export default function InvoiceTable({ data }: {data: InvoiceType}) {
 
   if (data?.length === 0) {
     return (
-      <div className="h-auto w-full p-6 rounded bg-white dark:bg-card">
+      <div className="h-auto w-full p-6 rounded bg-card-light dark:bg-card">
         <Alert />
       </div>
     )
   }
 
   return (
-    <div className="h-auto w-full rounded bg-white dark:bg-card">
+    <div className="h-auto w-full rounded bg-card-light dark:bg-card">
     <Table>
       <TableHeader>
         <TableRow>

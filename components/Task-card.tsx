@@ -56,7 +56,7 @@ export default function TaskCard({id, title, priority, status}: TaskType) {
 
   return (
   <div className="h-auto w-full p-6 flex flex-col justify-center items-center
-    gap-4 bg-white dark:bg-card rounded"
+    gap-4 bg-card-light dark:bg-card rounded"
   >
     <div className="h-auto w-full text-left">
       <h2 className={`text-lg font-text font-medium
