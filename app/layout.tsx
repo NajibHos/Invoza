@@ -26,11 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="">
-      <ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${ibmPlexSans.variable} antialiased`}
       >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
         <Header />
         <main className="h-auto w-full">
           {children}
@@ -40,8 +45,8 @@ export default function RootLayout({
             className="!bg-white dark:!bg-dark"
           />
         </main>
+        </ThemeProvider>
       </body>
-      </ThemeProvider>
     </html>
   );
 }
