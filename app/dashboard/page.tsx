@@ -68,7 +68,7 @@ export default async function Dashboard() {
           lg:grid-cols-4 gap-8"
         >
           <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-white dark:bg-card"
+            items-center gap-5 rounded bg-card-light dark:bg-card"
           >
             <div className="h-auto w-full text-left">
               <h2 className="text-lg font-text font-medium
@@ -86,7 +86,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-white dark:bg-card "
+            items-center gap-5 rounded bg-card-light dark:bg-card "
           >
             <div className="h-auto w-full text-left">
               <h2 className="text-lg font-text font-medium
@@ -104,7 +104,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-white dark:bg-card "
+            items-center gap-5 rounded bg-card-light dark:bg-card "
           >
             <div className="h-auto w-full text-left">
               <h2 className="text-lg font-text font-medium
@@ -122,7 +122,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-white dark:bg-card "
+            items-center gap-5 rounded bg-card-light dark:bg-card "
           >
             <div className="h-auto w-full text-left">
               <h2 className="text-lg font-text font-medium
@@ -142,7 +142,7 @@ export default async function Dashboard() {
         </div>
         <div className="h-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-center gap-5 bg-white dark:bg-card rounded"
+            items-center gap-5 bg-card-light dark:bg-card rounded"
           >
             <div className="h-auto w-full text-left">
               <h2 className="text-lg font-text font-medium
@@ -156,7 +156,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-center gap-5 bg-white dark:bg-card rounded"
+            items-center gap-5 bg-card-light dark:bg-card rounded"
           >
             <div className="h-auto w-full text-left">
               <h2 className="text-lg font-text font-medium
@@ -171,7 +171,7 @@ export default async function Dashboard() {
           </div>
         </div>
         <div className="h-auto w-full p-6 flex flex-col justify-center items-center
-          gap-5 bg-white dark:bg-card rounded"
+          gap-5 bg-card-light dark:bg-card rounded"
         >
           <div className="h-auto w-full text-left">
             <h2 className="text-lg font-text font-medium
@@ -185,7 +185,7 @@ export default async function Dashboard() {
         </div>
         <div className="h-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-start gap-6 rounded bg-white dark:bg-card"
+            items-start gap-6 rounded bg-card-light dark:bg-card"
           >
             <div className="h-auto w-full">
               <ChartNoAxesGantt
@@ -223,7 +223,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-start gap-6 rounded bg-white dark:bg-card"
+            items-start gap-6 rounded bg-card-light dark:bg-card"
           >
             <div className="h-auto w-full">
               <FileText
@@ -261,7 +261,7 @@ export default async function Dashboard() {
             </div>
           </div>
           <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-start gap-6 rounded bg-white dark:bg-card"
+            items-start gap-6 rounded bg-card-light dark:bg-card"
           >
             <div className="h-auto w-full">
               <ListTodo
