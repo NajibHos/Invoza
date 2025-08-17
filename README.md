@@ -77,4 +77,5 @@ npx prisma migrate dev --name init
 
 # all set, now run locally
 npm run dev
+
 ```bash
