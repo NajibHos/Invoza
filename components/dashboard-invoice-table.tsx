@@ -14,25 +14,23 @@ import Link from "next/link";
 import Alert from "./Alert";
 import InvoicePdfButton from "./invoice-pdf";
 
-type InvoiceType = [
-  {
-    id: string;
-    invoiceId: string;
-    status: string;
-    createdAt: Date;
-    dueDate: Date;
-    billerName: string;
-    billerEmail: string;
-    billerAddress: string;
-    clientName: string;
-    clientEmail: string;
-    clientAddress: string;
-    description: string;
-    price: number;
-    quantity: number;
-    total: number;
-  }
-]
+type InvoiceType = {
+  id: string;
+  invoiceId: string;
+  status: string;
+  createdAt: Date;
+  dueDate: Date;
+  billerName: string;
+  billerEmail: string;
+  billerAddress: string;
+  clientName: string;
+  clientEmail: string;
+  clientAddress: string;
+  description: string;
+  price: number;
+  quantity: number;
+  total: number;
+}[]
 
 export default function InvoiceTable({ data }: {data: InvoiceType}) {
 
