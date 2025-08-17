@@ -4,7 +4,24 @@ import { format } from "date-fns";
 import jsPDF from "jspdf";
 import { Download } from "lucide-react";
 
-export default function InvoicePdfButton({ invoice }: { invoice: any }) {
+interface InvoiceType {
+  invoiceId: string;
+  status: string;
+  createdAt: Date;
+  dueDate: Date;
+  billerName: string;
+  billerEmail: string;
+  billerAddress: string;
+  clientName: string;
+  clientEmail: string;
+  clientAddress: string;
+  description: string;
+  price: number;
+  quantity: number;
+  total: number;
+}
+
+export default function InvoicePdfButton({ invoice }: { invoice: InvoiceType }) {
 
   function handleDownload() {
     const pdf = new jsPDF({
