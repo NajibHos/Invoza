@@ -11,7 +11,7 @@
 @theme {
   --font-heading: "Inter", sans-serif;
   --font-text: "IBM Plex Sans", sans-serif;
-  --color-dark: #08080a;
+  --color-card-light: #f7f7f7;
   --color-card: #171717;
   --color-active: #0257cf;
 }
