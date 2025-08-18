@@ -1,10 +1,7 @@
 'use client';
 
-
-import { authClient } from "@/lib/auth/auth-client";
 import { CreateInvoice } from "@/actions/invoice-action";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -39,16 +36,6 @@ function SubmitButton() {
 }
 
 export default function NewInvoice() {
-
-  // check authentication status first
-  const { data: session, isPending } = authClient.useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isPending && !session) {
-      router.push('/sign-in');
-    }
-  }, [session, isPending, router])
 
   // invoice related state variables
   const [open, setOpen] = useState(false);

@@ -1,6 +1,4 @@
-import { GetSession } from "@/actions/auth-action";
 import { GetProjects } from "@/actions/project-action";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import Alert from "@/components/Alert";
 import ProjectCard from "@/components/Project-card";
@@ -11,13 +9,6 @@ import Loading from "@/components/Loading";
 export default async function Projets({
   searchParams
 }: {searchParams: Promise<{[key: string]: string | string[] | undefined}>}) {
-
-  // check authentication status
-  const session = await GetSession();
-
-  if (!session) {
-    redirect('/sign-in');
-  }
 
   // get search params and fetch data
   const { status } = await searchParams;

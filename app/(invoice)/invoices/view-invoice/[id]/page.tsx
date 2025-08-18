@@ -1,6 +1,4 @@
-import { GetSession } from "@/actions/auth-action";
 import { GetInvoice } from "@/actions/invoice-action";
-import { redirect } from "next/navigation";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/badge";
 import InvoiceUpdateButton from "@/components/Invoice-update-button";
@@ -8,13 +6,6 @@ import InvoiceUpdateButton from "@/components/Invoice-update-button";
 export default async function ViewInvoice({
   params
 }: {params: Promise<{id: string}>}) {
-
-  // check authentication status
-  const session = await GetSession();
-
-  if (!session) {
-    redirect('/sign-in');
-  }
 
   // get id from params and fetch data
   const { id } = await params;

@@ -1,20 +1,11 @@
-import { GetSession } from "@/actions/auth-action";
 import { GetTasks } from "@/actions/task-action";
 import Link from "next/link";
 import TaskCard from "@/components/Task-card";
 import Alert from "@/components/Alert";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/components/Loading";
 
 export default async function Transactions() {
-
-  // check authentication status
-  const session = await GetSession();
-
-  if (!session) {
-    redirect('/sign-in');
-  }
 
   // get data
   const data = await GetTasks();

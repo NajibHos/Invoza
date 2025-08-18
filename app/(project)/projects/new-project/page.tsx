@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect, useState } from "react";
-import { authClient } from "@/lib/auth/auth-client";
+import { useState } from "react";
 import { CreateProject } from "@/actions/project-action";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -26,16 +24,6 @@ import { toast } from "sonner";
 import SubmitButton from "@/components/Submit-button";
 
 export default function NewProject() {
-
-  // check authentication status
-  const { data: session, isPending } = authClient.useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isPending && !session) {
-      router.push('/sign-in');
-    }
-  }, [session, isPending, router])
 
   // project related state variables
   const [open, setOpen] = useState(false);

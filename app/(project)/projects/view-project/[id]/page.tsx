@@ -1,6 +1,4 @@
-import { GetSession } from "@/actions/auth-action";
 import { GetProject, UpdateStatus } from "@/actions/project-action";
-import { redirect } from "next/navigation";
 import { format } from "date-fns";
 import {
   Select,
@@ -11,13 +9,6 @@ import {
 } from "@/components/ui/select";
 
 export default async function ViewProject({params}: {params: Promise<{id : string}>}) {
-
-  // check authentication status
-  const session = await GetSession();
-
-  if (!session) {
-    redirect('/sign-in');
-  }
 
   // get id from params and fetch data
   const { id } = await params;

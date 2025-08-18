@@ -1,6 +1,4 @@
-import { GetSession } from "@/actions/auth-action";
 import { GetInvoices } from "@/actions/invoice-action";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import InvoiceFilter from "@/components/invoice-filter";
 import InvoiceTable from "@/components/Invoice-table";
@@ -10,13 +8,6 @@ import { Suspense } from "react";
 export default async function Invoices({
   searchParams
 }: {searchParams: Promise<{[key: string]: string | string[] | undefined}>}) {
-
-  // check authentication status first
-  const session = await GetSession();
-
-  if (!session) {
-    redirect('/sign-in');
-  }
 
   // get search params and fetch data
   const { status } = await searchParams;

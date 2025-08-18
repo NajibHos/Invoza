@@ -1,9 +1,6 @@
 'use client';
 
-import { useEffect } from "react";
-import { authClient } from "@/lib/auth/auth-client";
 import { CreateTask } from "@/actions/task-action";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -16,16 +13,6 @@ import SubmitButton from "@/components/Submit-button";
 import { toast } from "sonner";
 
 export default function NewTask() {
-
-  // check authentication status
-  const { data: session, isPending } = authClient.useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isPending && !session) {
-      router.push('/sign-in');
-    }
-  }, [session, isPending, router])
 
   // form action
   async function formAction(formData: FormData) {
