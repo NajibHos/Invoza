@@ -57,6 +57,9 @@ export default function NewProject() {
     } else {
       toast.success('project has been created');
     }
+
+    // reset date
+    setDate(undefined);
   }
 
   return (
