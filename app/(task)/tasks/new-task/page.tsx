@@ -15,7 +15,7 @@ import {
 import SubmitButton from "@/components/Submit-button";
 import { toast } from "sonner";
 
-export default function NewTransaction() {
+export default function NewTask() {
 
   // check authentication status
   const { data: session} = authClient.useSession();
