@@ -4,6 +4,8 @@ import Link from "next/link";
 import TaskCard from "@/components/Task-card";
 import Alert from "@/components/Alert";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 export default async function Transactions() {
 
@@ -55,6 +57,7 @@ export default async function Transactions() {
         <div className="h-auto w-full grid grid-cols-1 md:grid-cols-2
           lg:grid-cols-3 gap-8"
         >
+          <Suspense fallback={<Loading />}>
           {
             !(data?.length === 0) && data?.map((data, i) => {
               return <TaskCard
@@ -66,6 +69,7 @@ export default async function Transactions() {
               />
             })
           }
+          </Suspense>
         </div>
       </div>
     </div>

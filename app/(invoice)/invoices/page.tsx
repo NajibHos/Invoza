@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import InvoiceFilter from "@/components/invoice-filter";
 import InvoiceTable from "@/components/Invoice-table";
+import Loading from "@/components/Loading";
+import { Suspense } from "react";
 
 export default async function Invoices({
   searchParams
@@ -54,7 +56,9 @@ export default async function Invoices({
           </div>
         </div>
         <InvoiceFilter />
-        <InvoiceTable data={data} />
+        <Suspense fallback={<Loading />}>
+          <InvoiceTable data={data} />
+        </Suspense>
       </div>
     </div>
   )

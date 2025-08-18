@@ -5,6 +5,8 @@ import Link from "next/link";
 import Alert from "@/components/Alert";
 import ProjectCard from "@/components/Project-card";
 import ProjectFilter from "@/components/Project-filter";
+import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 export default async function Projets({
   searchParams
@@ -62,6 +64,7 @@ export default async function Projets({
           !(projects?.length === 0) && <div className="h-auto w-full
               grid grid-cols-1 lg:grid-cols-3 gap-8"
             >
+              <Suspense fallback={<Loading />}>
               {
                 projects?.map((data, i) => {
                   return <ProjectCard
@@ -73,6 +76,7 @@ export default async function Projets({
                   />
                 })
               }
+              </Suspense>
             </div>
         }
       </div>
