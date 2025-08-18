@@ -7,6 +7,8 @@ import InvoiceTable from "@/components/dashboard-invoice-table";
 import ProjectChart from "@/components/Project-chart";
 import { ChartNoAxesGantt, FileText, ListTodo } from "lucide-react";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import Loading from "@/components/Loading";
 
 export default async function Dashboard() {
 
@@ -20,14 +22,24 @@ export default async function Dashboard() {
   // get current user name
   const userName = session?.user.name;
 
-  // fetch data
-  const income = await GetIncomeThisMonth();
-  const pendingIncome = await GetPendingPayments();
-  const completedProjects = await GetCompletedProjects();
-  const pendingProjects = await GetPendingProjects();
-  const incomeChartData = await GetMonthlyIncomeChartData();
-  const projectChartData = await GetProjectChartData();
-  const invoiceData = await GetInvoices(undefined);
+  // prarally fetch dashboard data
+  const [
+    income,
+    pendingIncome,
+    completedProjects,
+    pendingProjects,
+    incomeChartData,
+    projectChartData,
+    invoiceData
+  ] = await Promise.all([
+    GetIncomeThisMonth(),
+    GetPendingPayments(),
+    GetCompletedProjects(),
+    GetPendingProjects(),
+    GetMonthlyIncomeChartData(),
+    GetProjectChartData(),
+    GetInvoices(undefined)
+  ])
 
   return (
     <div className="h-auto w-full py-12 flex justify-center items-center
@@ -152,7 +164,9 @@ export default async function Dashboard() {
               </h2>
             </div>
             <div className="h-auto w-full">
-              <IncomeChart data={incomeChartData} />
+              <Suspense fallback={<Loading />}>
+                <IncomeChart data={incomeChartData} />
+              </Suspense>
             </div>
           </div>
           <div className="h-auto w-full p-6 flex flex-col justify-center
@@ -166,7 +180,9 @@ export default async function Dashboard() {
               </h2>
             </div>
             <div className="h-auto w-full">
-              <ProjectChart data={projectChartData} />
+              <Suspense fallback={<Loading />}>
+                <ProjectChart data={projectChartData} />
+              </Suspense>
             </div>
           </div>
         </div>
@@ -180,7 +196,9 @@ export default async function Dashboard() {
             </h2>
           </div>
           <div className="h-auto w-full">
-            <InvoiceTable data={invoiceData ?? []} />
+            <Suspense fallback={<Loading />}>
+              <InvoiceTable data={invoiceData ?? []} />
+            </Suspense>
           </div>
         </div>
         <div className="h-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
