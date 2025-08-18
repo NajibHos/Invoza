@@ -1,16 +1,26 @@
 'use client';
 
-import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 
 export default function ToggleTheme() {
 
-  const { theme, setTheme } = useTheme();
+  const [muted, setMuted] = useState(false);
+  const { setTheme, resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMuted(true);
+  }, [])
+
+  if (muted) {
+    return null; // prevent hydration mismatch
+  }
 
   return (
     <div className="h-auto w-auto">
       {
-        theme === 'light' && <button
+        resolvedTheme === 'light' && <button
           onClick={() => setTheme('dark')}
           className="bg-transparent cursor-pointer flex
           justify-center items-center"
@@ -19,7 +29,7 @@ export default function ToggleTheme() {
         </button>
       }
       {
-        theme === 'dark' && <button
+        resolvedTheme === 'dark' && <button
           onClick={() => setTheme('light')}
           className="bg-transparent cursor-pointer flex
           justify-center items-center"
