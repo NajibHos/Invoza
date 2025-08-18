@@ -19,7 +19,7 @@ export default function SignUpPage() {
     if (session) {
       router.push('/dashboard');
     }
-  }, [router, session])
+  }, [session])
 
   // form action
   async function formAction(formData: FormData) {
