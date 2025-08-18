@@ -41,14 +41,14 @@ function SubmitButton() {
 export default function NewInvoice() {
 
   // check authentication status first
-  const { data: session} = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
+    if (!isPending && !session) {
       router.push('/sign-in');
     }
-  }, [session])
+  }, [session, isPending, router])
 
   // invoice related state variables
   const [open, setOpen] = useState(false);

@@ -28,14 +28,14 @@ import SubmitButton from "@/components/Submit-button";
 export default function NewProject() {
 
   // check authentication status
-  const { data: session} = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
+    if (!isPending && !session) {
       router.push('/sign-in');
     }
-  }, [session])
+  }, [session, isPending, router])
 
   // project related state variables
   const [open, setOpen] = useState(false);

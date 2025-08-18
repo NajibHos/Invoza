@@ -18,14 +18,14 @@ import { toast } from "sonner";
 export default function NewTask() {
 
   // check authentication status
-  const { data: session} = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
+    if (!isPending && !session) {
       router.push('/sign-in');
     }
-  }, [session])
+  }, [session, isPending, router])
 
   // form action
   async function formAction(formData: FormData) {
