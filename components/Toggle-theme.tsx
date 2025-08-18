@@ -6,16 +6,7 @@ import { Moon, Sun } from "lucide-react";
 
 export default function ToggleTheme() {
 
-  const [muted, setMuted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMuted(true);
-  }, [])
-
-  if (muted) {
-    return null; // prevent hydration mismatch
-  }
 
   return (
     <div className="h-auto w-auto">
