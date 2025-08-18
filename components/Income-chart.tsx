@@ -10,15 +10,7 @@ const chartConfig = {
   }
 } satisfies ChartConfig;
 
-const chartData: {month: string, amount: number}[] = [
-  { month: 'Jan', amount: 186 },
-  { month: 'Feb', amount: 170 },
-  { month: 'May', amount: 190 },
-  { month: 'Jun', amount: 155 },
-  { month: 'Jul', amount: 192 }
-]
-
-export default function IncomeChart({data}: {data: any[] | undefined}) {
+export default function IncomeChart({ data }: { data: any[] | undefined }) {
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
