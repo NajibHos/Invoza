@@ -12,14 +12,14 @@ import { toast } from "sonner";
 export default function SignUpPage() {
 
   // check authentication status first
-  const { data: session} = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (session) {
+    if (!isPending && session) {
       router.push('/dashboard');
     }
-  }, [session])
+  }, [session, isPending, router])
 
   // form action
   async function formAction(formData: FormData) {
