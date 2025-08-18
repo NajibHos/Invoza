@@ -18,14 +18,14 @@ import { toast } from "sonner";
 export default function NewTransaction() {
 
   // check authentication status
-  const router = useRouter();
   const { data: session} = authClient.useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (!session) {
       router.push('/sign-in');
     }
-  }, [router, session])
+  }, [session])
 
   // form action
   async function formAction(formData: FormData) {

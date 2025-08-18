@@ -48,7 +48,7 @@ export default function NewInvoice() {
     if (!session) {
       router.push('/sign-in');
     }
-  }, [router, session])
+  }, [session])
 
   // invoice related state variables
   const [open, setOpen] = useState(false);
