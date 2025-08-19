@@ -5,6 +5,26 @@ import prisma from "@/lib/prisma/prisma";
 import { revalidatePath } from 'next/cache';
 import { GetSession } from './auth-action';
 
+export type InvoiceListItem = {
+  id: string;
+  invoiceId: string;
+  status: string;
+  createdAt: Date;
+  dueDate: Date | null;
+  updatedAt: Date | null;
+  userId: string | null;
+  billerName: string;
+  billerEmail: string;
+  billerAddress: string;
+  clientName: string;
+  clientEmail: string;
+  clientAddress: string;
+  description: string;
+  price: number;
+  quantity: number;
+  total: number;
+}
+
 interface InvoiceType {
   dueDate: Date | undefined;
   billerName: string;
@@ -44,7 +64,10 @@ export async function CreateInvoice(data: InvoiceType) {
   }
 }
 
-export async function GetInvoices(invoiceStatus: string | undefined, userID?: string) {
+export async function GetInvoices(
+  invoiceStatus: string | undefined,
+  userID?: string
+): Promise<InvoiceListItem[]> {
 
   let resolvedUserId = userID;
   if (!resolvedUserId) {
@@ -74,6 +97,7 @@ export async function GetInvoices(invoiceStatus: string | undefined, userID?: st
         status: true,
         createdAt: true,
         dueDate: true,
+        updatedAt: true,
         userId: true,
         billerName: true,
         billerEmail: true,
@@ -86,11 +110,12 @@ export async function GetInvoices(invoiceStatus: string | undefined, userID?: st
         quantity: true,
         total: true,
       }
-    })
+    }) as unknown as InvoiceListItem[]
 
     return res;
   } catch (error) {
     console.error(error);
+    return [];
   }
 }
 
