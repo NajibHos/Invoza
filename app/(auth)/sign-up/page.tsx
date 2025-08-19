@@ -34,7 +34,7 @@ export default function SignUpPage() {
       toast.error('Error signing up user');
     } else {
       router.push('/dashboard');
-      toast.success('User has been created');
+      toast.success('Sign up successful');
     }
   }
 
