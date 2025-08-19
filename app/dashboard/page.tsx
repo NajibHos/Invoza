@@ -272,7 +272,7 @@ export default async function Dashboard() {
               <Link href={'/invoices'}>
               <button
                 className="w-auto px-6 py-2 text-base font-text
-                font-medium rouned cursor-pointer text-white bg-active"
+                font-medium rounded cursor-pointer text-white bg-active"
               >
                 View
               </button>
