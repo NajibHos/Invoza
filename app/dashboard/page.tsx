@@ -3,8 +3,8 @@ import { GetCompletedProjects, GetIncomeThisMonth, GetMonthlyIncomeChartData, Ge
 import { GetInvoices } from "@/actions/invoice-action";
 import Link from "next/link";
 import IncomeChart from "@/components/Income-chart";
-import InvoiceTable from "@/components/dashboard-invoice-table";
 import ProjectChart from "@/components/Project-chart";
+import InvoiceTable from "@/components/dashboard-invoice-table";
 import { ChartNoAxesGantt, FileText, ListTodo } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -14,6 +14,7 @@ export default async function Dashboard() {
 
   // check authentication status before proceeding futher
   const session = await GetSession();
+  const userID = session?.user.id ?? '';
 
   if (!session) {
     redirect('/sign-in');
@@ -32,13 +33,13 @@ export default async function Dashboard() {
     projectChartData,
     invoiceData
   ] = await Promise.all([
-    GetIncomeThisMonth(),
-    GetPendingPayments(),
-    GetCompletedProjects(),
-    GetPendingProjects(),
-    GetMonthlyIncomeChartData(),
-    GetProjectChartData(),
-    GetInvoices(undefined)
+    GetIncomeThisMonth(userID),
+    GetPendingPayments(userID),
+    GetCompletedProjects(userID),
+    GetPendingProjects(userID),
+    GetMonthlyIncomeChartData(userID),
+    GetProjectChartData(userID),
+    GetInvoices(undefined, userID)
   ])
 
   return (
