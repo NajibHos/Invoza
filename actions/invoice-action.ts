@@ -44,21 +44,47 @@ export async function CreateInvoice(data: InvoiceType) {
   }
 }
 
-export async function GetInvoices(invoiceStatus: string | undefined) {
+export async function GetInvoices(invoiceStatus: string | undefined, userID?: string) {
 
-  const session = await GetSession();
-  const userId = session?.user.id;
+  let resolvedUserId = userID;
+  if (!resolvedUserId) {
+    const session = await GetSession();
+    resolvedUserId = session?.user.id;
+  }
+
+  if (!resolvedUserId) {
+    return [];
+  }
 
   try {
     const res = await prisma.invoice.findMany({
+      take: 10,
       where: {
         AND: [
-          invoiceStatus ? {status: invoiceStatus} : {}
+          invoiceStatus ? { status: invoiceStatus } : {}
         ],
-        userId: userId
+        userId: resolvedUserId
       },
       orderBy: {
         createdAt: 'desc'
+      },
+      select: {
+        id: true,
+        invoiceId: true,
+        status: true,
+        createdAt: true,
+        dueDate: true,
+        userId: true,
+        billerName: true,
+        billerEmail: true,
+        billerAddress: true,
+        clientName: true,
+        clientEmail: true,
+        clientAddress: true,
+        description: true,
+        price: true,
+        quantity: true,
+        total: true,
       }
     })
 
