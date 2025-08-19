@@ -3,63 +3,55 @@
 import prisma from "@/lib/prisma/prisma";
 import { GetSession } from "./auth-action";
 
-export async function GetIncomeThisMonth() {
-
-  // get current user id
-  const session = await GetSession();
-  const userId = session?.user.id;
+export async function GetIncomeThisMonth(userID: string) {
 
   const now = new Date();
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
 
   try {
-    const res = await prisma.invoice.findMany({
+    const res = await prisma.invoice.aggregate({
+      _sum: { total: true },
       where: {
         status: 'Paid',
         createdAt: {
           gte: new Date(`${year}-${month}-01`),
           lt: new Date(`${year}-${month + 1}-01`)
         },
-        userId: userId
+        userId: userID
       }
     })
 
-    return res.reduce((sum, invoice) => sum + invoice.total, 0);
+    return res._sum.total ?? 0;
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function GetPendingPayments() {
-
-  const session = await GetSession();
-  const userId = session?.user.id;
+export async function GetPendingPayments(userID: string) {
 
   try {
-    const res = await prisma.invoice.findMany({
+    const res = await prisma.invoice.aggregate({
+      _sum: { total: true },
       where: {
         status: 'Pending',
-        userId: userId
+        userId: userID
       }
     })
 
-    return res.reduce((sum, invoice) => sum + invoice.total, 0);
+    return res._sum.total ?? 0;
   } catch (error) {
     console.error(error);
   }
 }
 
-export async function GetCompletedProjects() {
-
-  const session = await GetSession();
-  const userId = session?.user.id;
+export async function GetCompletedProjects(userID: string) {
 
   try {
     const res = await prisma.project.count({
       where: {
         status: 'Completed',
-        userId: userId
+        userId: userID
       }
     })
 
@@ -69,16 +61,13 @@ export async function GetCompletedProjects() {
   }
 }
 
-export async function GetPendingProjects() {
-
-  const session = await GetSession();
-  const userId = session?.user.id;
+export async function GetPendingProjects(userID: string) {
 
   try {
     const res = await prisma.project.count({
       where: {
         status: 'Pending',
-        userId: userId
+        userId: userID
       }
     })
 
@@ -88,10 +77,7 @@ export async function GetPendingProjects() {
   }
 }
 
-export async function GetMonthlyIncomeChartData() {
-
-  const session = await GetSession();
-  const userId = session?.user.id;
+export async function GetMonthlyIncomeChartData(userID: string) {
 
   // get last 6 months
   const now = new Date();
@@ -103,18 +89,19 @@ export async function GetMonthlyIncomeChartData() {
 
   try {
     const res = await Promise.all(months.map(async ({year, month, label}) => {
-      const invoices = await prisma.invoice.findMany({
+      const aggregate = await prisma.invoice.aggregate({
+        _sum: { total: true },
         where: {
           status: 'Paid',
           createdAt: {
             gte: new Date(`${year}-${month}-01`),
             lt: new Date(`${year}-${month + 1}-01`)
           },
-          userId: userId
+          userId: userID
         }
       })
 
-      const amount = invoices.reduce((sum, inv) => sum + inv.total, 0);
+      const amount = aggregate._sum.total ?? 0;
       return { month: label, amount };
     }))
 
@@ -124,32 +111,29 @@ export async function GetMonthlyIncomeChartData() {
   }
 }
 
-export async function GetProjectChartData() {
-
-  const session = await GetSession();
-  const userId = session?.user.id;
+export async function GetProjectChartData(userID: string) {
 
   try {
-    const completed = await prisma.project.count({
-      where: {
-        status: 'Completed',
-        userId: userId
-      }
-    });
-
-    const pending = await prisma.project.count({
-      where: {
-        status: 'Pending',
-        userId: userId
-      }
-    });
-
-    const cancelled = await prisma.project.count({
-      where: {
-        status: 'Cancelled',
-        userId: userId
-      }
-    });
+    const [completed, pending, cancelled] = await Promise.all([
+      prisma.project.count({
+        where: {
+          status: 'Completed',
+          userId: userID
+        }
+      }),
+      prisma.project.count({
+        where: {
+          status: 'Pending',
+          userId: userID
+        }
+      }),
+      prisma.project.count({
+        where: {
+          status: 'Cancelled',
+          userId: userID
+        }
+      })
+    ]);
 
     return [
       {
