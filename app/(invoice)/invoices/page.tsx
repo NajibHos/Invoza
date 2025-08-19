@@ -1,4 +1,5 @@
 import { GetInvoices } from "@/actions/invoice-action";
+import { GetSession } from "@/actions/auth-action";
 import Link from "next/link";
 import InvoiceFilter from "@/components/invoice-filter";
 import InvoiceTable from "@/components/Invoice-table";
@@ -12,7 +13,9 @@ export default async function Invoices({
   // get search params and fetch data
   const { status } = await searchParams;
   const invoiceStatus = status as string;
-  const data = await GetInvoices(invoiceStatus);
+  const session = await GetSession();
+  const userID = session?.user.id ?? '';
+  const data = await GetInvoices(invoiceStatus, userID);
 
   return (
     <div className="h-auto w-full py-12 flex justify-center items-center"
