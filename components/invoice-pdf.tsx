@@ -10,7 +10,6 @@ interface InvoiceType {
   createdAt: Date;
   dueDate: Date | null;
   updatedAt: Date | null;
-  userId: string | null;
   billerName: string;
   billerEmail: string;
   billerAddress: string;
