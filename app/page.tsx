@@ -38,17 +38,25 @@ export default async function Home() {
             for insights.
           </p>
         </div>
-        <div className="h-auto w-full text-left">
-          <h2 className="text-base font-text font-medium
-            text-stone-700 dark:text-stone-300"
-          >
-            Built with: <span className="text-stone-900 dark:text-white">
-            Next.js, Better Auth, Prisma, Neon, jsPDF, Tailwind, Shadcn UI
-            </span>
-          </h2>
+        <div className="h-auto w-full flex flex-col justify-center items-center gap-2">
+          <div className="h-auto w-full text-left">
+            <h2 className="text-base font-text font-medium
+              text-stone-700 dark:text-stone-300"
+            >
+            Built with:
+            </h2>
+          </div>
+          <div className="h-auto w-full text-left">
+            <h2 className="text-base font-text font-medium
+              text-stone-900 dark:text-white"
+            >
+              •Next.js, TypeScript, Better Auth, Prisma, Neon, jsPDF, Shadcn UI, Recharts, 
+              Next Theme, and Tailwind CSS
+            </h2>
+          </div>
         </div>
         <div className="h-auto w-full flex flex-col justify-center
-          items-start gap-4"
+          items-start gap-2"
         >
           <div className="h-auto w-full text-left">
             <h2 className="text-base font-text font-medium
@@ -119,6 +127,20 @@ export default async function Home() {
             </Link>
           </div>
         }
+        <div className="h-auto w-full text-center">
+          <h2 className="text-base font-text font-medium 
+            text-stone-700 dark:text-stone-300"
+          >
+            Web App developed by
+            <a 
+              href="https://najibdev.vercel.app" 
+              target="_blank"
+              className="text-active underline ml-1"
+            >
+              Najib Hossain
+            </a>
+          </h2>
+        </div>
       </div>
     </div>
   )
