@@ -13,6 +13,8 @@ export default async function Invoices({
   // get search params and fetch data
   const { status } = await searchParams;
   const invoiceStatus = status as string;
+
+  // get current user id and session
   const session = await GetSession();
   const userID = session?.user.id ?? '';
   const data = await GetInvoices(invoiceStatus, userID);
