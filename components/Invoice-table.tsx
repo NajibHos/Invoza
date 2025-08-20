@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import Alert from "./Alert";
-import InvoicePdfButton from "./invoice-pdf";
+import InvoicePdfButton from "./Invoice-pdf";
 
 type InvoiceType = {
   id: string;
