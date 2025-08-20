@@ -4,7 +4,7 @@ import { GetInvoices } from "@/actions/invoice-action";
 import Link from "next/link";
 import IncomeChart from "@/components/Income-chart";
 import ProjectChart from "@/components/Project-chart";
-import InvoiceTable from "@/components/dashboard-invoice-table";
+import InvoiceTable from "@/components/Dashboard-invoice-table";
 import { ChartNoAxesGantt, FileText, ListTodo } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
