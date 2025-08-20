@@ -12,7 +12,7 @@ import { format } from "date-fns";
 import { ExternalLink } from "lucide-react"
 import Link from "next/link";
 import Alert from "./Alert";
-import InvoicePdfButton from "./invoice-pdf";
+import InvoicePdfButton from "./Invoice-pdf";
 
 type InvoiceType = {
   id: string;
