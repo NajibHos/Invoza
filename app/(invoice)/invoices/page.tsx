@@ -1,7 +1,7 @@
 import { GetInvoices } from "@/actions/invoice-action";
 import { GetSession } from "@/actions/auth-action";
 import Link from "next/link";
-import InvoiceFilter from "@/components/invoice-filter";
+import InvoiceFilter from "@/components/Invoice-filter";
 import InvoiceTable from "@/components/Invoice-table";
 import Loading from "@/components/Loading";
 import { Suspense } from "react";
