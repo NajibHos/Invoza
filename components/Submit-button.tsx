@@ -2,7 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 
-export default function SubmitButton() {
+export default function SubmitButton({ text }: { text?: string }) {
 
   const { pending } = useFormStatus();
 
@@ -15,7 +15,7 @@ export default function SubmitButton() {
         text-white bg-blue-600 disabled:bg-blue-500
         rounded cursor-pointer"
       >
-        {pending ? 'Submitting' : 'Submit'}
+        {pending ? 'Submitting' : text || 'Submit'}
       </button>
     </div>
   )
