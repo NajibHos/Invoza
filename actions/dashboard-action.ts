@@ -1,7 +1,6 @@
 'use server';
 
 import prisma from "@/lib/prisma/prisma";
-import { GetSession } from "./auth-action";
 
 export async function GetIncomeThisMonth(userID: string) {
 
