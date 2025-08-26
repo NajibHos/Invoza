@@ -3,8 +3,6 @@ import { GetSession } from "@/actions/auth-action";
 import Link from "next/link";
 import InvoiceFilter from "@/components/Invoice-filter";
 import InvoiceTable from "@/components/Invoice-table";
-import Loading from "@/components/Loading";
-import { Suspense } from "react";
 
 export default async function Invoices({
   searchParams
@@ -52,9 +50,7 @@ export default async function Invoices({
           </div>
         </div>
         <InvoiceFilter />
-        <Suspense fallback={<Loading />}>
-          <InvoiceTable data={data} />
-        </Suspense>
+        <InvoiceTable data={data} />
       </div>
     </div>
   )
