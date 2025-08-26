@@ -141,7 +141,7 @@ export default function SignInPage() {
                 </Link>
               </h2>
             </div>
-            <SubmitButton />
+            <SubmitButton text={'Sign in'} />
           </form>
         </div>
       </div>

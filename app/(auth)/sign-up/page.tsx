@@ -142,7 +142,7 @@ export default function SignUpPage() {
                 </Link>
               </h2>
             </div>
-            <SubmitButton />
+            <SubmitButton text={'Sign up'} />
           </form>
         </div>
       </div>
