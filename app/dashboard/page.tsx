@@ -1,46 +1,34 @@
 import { GetSession } from "@/actions/auth-action";
-import { GetCompletedProjects, GetIncomeThisMonth, GetMonthlyIncomeChartData, GetPendingPayments, GetPendingProjects, GetProjectChartData } from "@/actions/dashboard-action";
-import { GetInvoices } from "@/actions/invoice-action";
-import Link from "next/link";
-import IncomeChart from "@/components/Income-chart";
-import ProjectChart from "@/components/Project-chart";
-import InvoiceTable from "@/components/Dashboard-invoice";
-import { ChartNoAxesGantt, FileText, ListTodo } from "lucide-react";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
-import Loading from "@/components/Loading";
+import { Suspense} from "react";
+import Link from "next/link";
+import { ChartNoAxesGantt, FileText, ListTodo } from "lucide-react";
+import CardSkeleton from "@/components/Card-skeleton";
+import PendingProjectCard from "@/components/Pending-projects";
+import CompletedProjectCard from "@/components/Completed-projects";
+import PendingPaymentCard from "@/components/Pending-payments";
+import MonthlyIncomeCard from "@/components/Monthly-income";
+import IncomeChartCard from "@/components/Income-chart-card";
+import ChartSkeleton from "@/components/chart-skeleton";
+import ProjectChartCard from "@/components/Project-chart-card";
+import InvoiceSkeleton from "@/components/Invoice-skeleton";
+import InvoiceCard from "@/components/Invoice-card";
+
+export const dynamic = 'force-dynamic';
 
 export default async function Dashboard() {
 
   // check authentication status before proceeding futher
   const session = await GetSession();
-  const userID = session?.user.id ?? '';
 
+  // get current user name and user id
+  const userID = session?.user.id ?? '';
+  const userName = session?.user.name;
+
+  // if session do not exist, navigate user to sign-in page
   if (!session) {
     redirect('/sign-in');
   }
-
-  // get current user name
-  const userName = session?.user.name;
-
-  // prarally fetch dashboard data
-  const [
-    income,
-    pendingIncome,
-    completedProjects,
-    pendingProjects,
-    incomeChartData,
-    projectChartData,
-    invoiceData
-  ] = await Promise.all([
-    GetIncomeThisMonth(userID),
-    GetPendingPayments(userID),
-    GetCompletedProjects(userID),
-    GetPendingProjects(userID),
-    GetMonthlyIncomeChartData(userID),
-    GetProjectChartData(userID),
-    GetInvoices(undefined, userID)
-  ])
 
   return (
     <div className="h-auto w-full py-12 flex justify-center items-center
@@ -80,127 +68,31 @@ export default async function Dashboard() {
         <div className="h-auto w-full grid grid-cols-1 md:grid-cols-2
           lg:grid-cols-4 gap-8"
         >
-          <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-card-light dark:bg-card"
-          >
-            <div className="h-auto w-full text-left">
-              <h2 className="text-lg font-text font-medium
-                text-stone-700 dark:text-stone-300"
-              >
-                Income this month
-              </h2>
-            </div>
-            <div className="h-auto w-full text-left">
-              <h2 className="text-2xl font-text font-medium
-                text-stone-900 dark:text-white"
-              >
-                {`$${income || 0}`}
-              </h2>
-            </div>
-          </div>
-          <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-card-light dark:bg-card "
-          >
-            <div className="h-auto w-full text-left">
-              <h2 className="text-lg font-text font-medium
-                text-stone-700 dark:text-stone-300"
-              >
-                Pending payments
-              </h2>
-            </div>
-            <div className="h-auto w-full text-left">
-              <h2 className="text-2xl font-text font-medium
-                text-stone-900 dark:text-white"
-              >
-                {`$${pendingIncome || 0}`}
-              </h2>
-            </div>
-          </div>
-          <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-card-light dark:bg-card "
-          >
-            <div className="h-auto w-full text-left">
-              <h2 className="text-lg font-text font-medium
-                text-stone-700 dark:text-stone-300"
-              >
-                Completed projects
-              </h2>
-            </div>
-            <div className="h-auto w-full text-left">
-              <h2 className="text-2xl font-text font-medium
-                text-stone-900 dark:text-white"
-              >
-                {completedProjects || 'No data'}
-              </h2>
-            </div>
-          </div>
-          <div className="h-auto w-full px-6 py-8 flex flex-col justify-center
-            items-center gap-5 rounded bg-card-light dark:bg-card "
-          >
-            <div className="h-auto w-full text-left">
-              <h2 className="text-lg font-text font-medium
-                text-stone-700 dark:text-stone-300"
-              >
-                Pending projects
-              </h2>
-            </div>
-            <div className="h-auto w-full text-left">
-              <h2 className="text-2xl font-text font-medium
-                text-stone-900 dark:text-white"
-              >
-                {pendingProjects || 'No data'}
-              </h2>
-            </div>
-          </div>
+          <Suspense fallback={<CardSkeleton />}>
+            <MonthlyIncomeCard userId={userID} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <PendingPaymentCard userId={userID} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <CompletedProjectCard userId={userID} />
+          </Suspense>
+          <Suspense fallback={<CardSkeleton />}>
+            <PendingProjectCard userId={userID} />
+          </Suspense>
         </div>
         <div className="h-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-center gap-5 bg-card-light dark:bg-card rounded"
-          >
-            <div className="h-auto w-full text-left">
-              <h2 className="text-lg font-text font-medium
-                text-stone-700 dark:text-stone-300"
-              >
-                Monthly Income Chart
-              </h2>
-            </div>
-            <div className="h-auto w-full">
-              <Suspense fallback={<Loading />}>
-                <IncomeChart data={incomeChartData} />
-              </Suspense>
-            </div>
-          </div>
-          <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-center gap-5 bg-card-light dark:bg-card rounded"
-          >
-            <div className="h-auto w-full text-left">
-              <h2 className="text-lg font-text font-medium
-                text-stone-700 dark:text-stone-300"
-              >
-                Projects by status
-              </h2>
-            </div>
-            <div className="h-auto w-full">
-              <Suspense fallback={<Loading />}>
-                <ProjectChart data={projectChartData} />
-              </Suspense>
-            </div>
-          </div>
+          <Suspense fallback={<ChartSkeleton />}>
+            <IncomeChartCard userId={userID} />
+          </Suspense>
+          <Suspense fallback={<ChartSkeleton />}>
+            <ProjectChartCard userId={userID} />
+          </Suspense>
         </div>
-        <div className="h-auto w-full p-6 flex flex-col justify-center items-center
-          gap-5 bg-card-light dark:bg-card rounded"
-        >
-          <div className="h-auto w-full text-left">
-            <h2 className="text-lg font-text font-medium
-              text-stone-700 dark:text-stone-300">
-              Recent Invoices
-            </h2>
-          </div>
-          <div className="h-auto w-full">
-            <Suspense fallback={<Loading />}>
-              <InvoiceTable data={invoiceData ?? []} />
-            </Suspense>
-          </div>
+        <div className="h-auto w-full">
+          <Suspense fallback={<InvoiceSkeleton />}>
+            <InvoiceCard userId={userID} />
+          </Suspense>
         </div>
         <div className="h-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="h-auto w-full p-6 flex flex-col justify-center
