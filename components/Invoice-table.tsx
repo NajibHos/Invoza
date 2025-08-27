@@ -37,12 +37,11 @@ type InvoiceType = {
   total: number;
 }[] | undefined
 
-export default function InvoiceTable({ data }: {data: InvoiceType}) {
 
-  console.log(data)
+export default function InvoiceTable({ invoices }: {invoices: InvoiceType}) {
 
   const [isPending, startTransition] = useTransition();
-
+  
   const handleDelete = (id: string) => {
     startTransition(async () => {
       const res = await RemoveInvoice(id);
@@ -56,7 +55,7 @@ export default function InvoiceTable({ data }: {data: InvoiceType}) {
     });
   };
 
-  if (data?.length === 0) {
+  if (invoices?.length === 0) {
     return (
       <div className="h-auto w-full p-6 rounded bg-card-light dark:bg-card">
         <Alert />
@@ -81,7 +80,7 @@ export default function InvoiceTable({ data }: {data: InvoiceType}) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data?.map((invoice, i) => (
+        {invoices?.map((invoice, i) => (
           <TableRow key={i}>
             <TableCell className="font-text font-medium">
               {invoice.invoiceId}
