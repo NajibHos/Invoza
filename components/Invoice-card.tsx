@@ -1,5 +1,5 @@
 import { GetInvoices } from "@/actions/invoice-action"
-import InvoiceTable from "./Invoice-table";
+import InvoiceTable from "./Dashboard-invoice";
 
 export default async function InvoiceCard({ userId }: { userId: string }) {
 
