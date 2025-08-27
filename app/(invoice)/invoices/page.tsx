@@ -3,6 +3,15 @@ import { GetSession } from "@/actions/auth-action";
 import Link from "next/link";
 import InvoiceFilter from "@/components/Invoice-filter";
 import InvoiceTable from "@/components/Invoice-table";
+import { Suspense } from "react";
+import InvoiceSkeleton from "@/components/Invoice-skeleton";
+
+async function Invoice({ status, userId }: { status: string, userId: string }) {
+  // get invoices
+  const invoices = await GetInvoices(status, userId);
+
+  return <InvoiceTable invoices={invoices} />
+}
 
 export default async function Invoices({
   searchParams
@@ -12,10 +21,9 @@ export default async function Invoices({
   const { status } = await searchParams;
   const invoiceStatus = status as string;
 
-  // get current user id and session
+  // get current user id
   const session = await GetSession();
   const userID = session?.user.id ?? '';
-  const data = await GetInvoices(invoiceStatus, userID);
 
   return (
     <div className="h-auto w-full py-12 flex justify-center items-center"
@@ -50,7 +58,9 @@ export default async function Invoices({
           </div>
         </div>
         <InvoiceFilter />
-        <InvoiceTable data={data} />
+        <Suspense fallback={<InvoiceSkeleton />}>
+          <Invoice status={invoiceStatus} userId={userID} />
+        </Suspense>
       </div>
     </div>
   )

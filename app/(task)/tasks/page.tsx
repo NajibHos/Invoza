@@ -2,11 +2,33 @@ import { GetTasks } from "@/actions/task-action";
 import Link from "next/link";
 import TaskCard from "@/components/Task-card";
 import Alert from "@/components/Alert";
+import { Suspense } from "react";
+import CardsSkeleton from "@/components/Cards-skeleton";
+
+interface TaskData {
+  id: string;
+  Title: string;
+  priority: string;
+  status: string | null;
+}
+
+export const dynamic = 'force-dynamic';
+
+function Tasks({ taskData }: { taskData: TaskData }) {
+  return (
+    <TaskCard 
+      id={taskData.id}
+      title={taskData.Title}
+      priority={taskData.priority}
+      status={taskData.status}
+    />
+  )
+}
 
 export default async function Transactions() {
 
-  // get data
-  const data = await GetTasks();
+  // get tasks
+  const tasks = await GetTasks();
 
   return (
     <div className="h-auto w-full py-12 flex justify-center items-center"
@@ -41,23 +63,21 @@ export default async function Transactions() {
           </div>
         </div>
         {
-          data?.length === 0 && <Alert />
+          tasks?.length === 0 && <Alert />
         }
-        <div className="h-auto w-full grid grid-cols-1 md:grid-cols-2
-          lg:grid-cols-3 gap-8"
-        >
-          {
-            !(data?.length === 0) && data?.map((data, i) => {
-              return <TaskCard
-                key={i}
-                id={data.id}
-                title={data.Title}
-                priority={data.priority}
-                status={data.status}
-              />
-            })
-          }
-        </div>
+        {
+          !(tasks?.length === 0) && <div className="h-auto w-full 
+              grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {
+                tasks?.map((data, i) => (
+                  <Suspense fallback={<CardsSkeleton />} key={i}>
+                    <Tasks taskData={data} />
+                  </Suspense>
+                ))
+              }
+            </div>
+        }
       </div>
     </div>
   )
