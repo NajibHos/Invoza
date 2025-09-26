@@ -2,12 +2,12 @@
 
 import { useFormStatus } from "react-dom";
 
-export default function SubmitButton({ text }: { text?: string }) {
+export default function SubmitButton({ text, pendingText }: { text?: string, pendingText?: string }) {
 
   const { pending } = useFormStatus();
 
   return (
-    <div className="h-auto w-full mt-2">
+    <div className="h-auto w-full">
       <button
         type="submit"
         disabled={pending}
@@ -15,7 +15,7 @@ export default function SubmitButton({ text }: { text?: string }) {
         text-white bg-blue-600 disabled:bg-blue-500
         rounded cursor-pointer"
       >
-        {pending ? 'Submitting' : text || 'Submit'}
+        {pending ? pendingText || 'Submitting...' : text || 'Submit'}
       </button>
     </div>
   )
