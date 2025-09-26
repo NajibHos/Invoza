@@ -33,7 +33,7 @@ export default function SignInPage() {
       toast.error('Invalid credentials');
     } else {
       router.push('/dashboard');
-      toast.success('Sign in successful');
+      toast.success('Sign in successful, redirecting...');
     }
   }
 
@@ -132,7 +132,7 @@ export default function SignInPage() {
               <h2 className="text-base font-text font-medium
                 text-stone-700 dark:text-stone-300"
               >
-                Don't have an account?
+                {`Don't`} have an account?
                 <Link
                   href={'/sign-up'}
                   className="underline text-active ml-2"
@@ -141,7 +141,7 @@ export default function SignInPage() {
                 </Link>
               </h2>
             </div>
-            <SubmitButton text={'Sign in'} />
+            <SubmitButton text={'Sign in'} pendingText={'Signing in...'} />
           </form>
         </div>
       </div>

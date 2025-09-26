@@ -34,7 +34,7 @@ export default function SignUpPage() {
       toast.error('Error signing up user');
     } else {
       router.push('/dashboard');
-      toast.success('Sign up successful');
+      toast.success('Sign up successful, redirecting...');
     }
   }
 
@@ -142,7 +142,7 @@ export default function SignUpPage() {
                 </Link>
               </h2>
             </div>
-            <SubmitButton text={'Sign up'} />
+            <SubmitButton text={'Sign up'} pendingText={'Signing up...'} />
           </form>
         </div>
       </div>
