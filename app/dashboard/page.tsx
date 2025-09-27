@@ -1,5 +1,4 @@
 import { GetSession } from "@/actions/auth-action";
-import { redirect } from "next/navigation";
 import { Suspense} from "react";
 import Link from "next/link";
 import { ChartNoAxesGantt, FileText, ListTodo } from "lucide-react";
@@ -18,17 +17,12 @@ export const dynamic = 'force-dynamic';
 
 export default async function Dashboard() {
 
-  // check authentication status before proceeding futher
+  // get current session
   const session = await GetSession();
 
   // get current user name and user id
   const userID = session?.user.id ?? '';
   const userName = session?.user.name;
-
-  // if session do not exist, navigate user to sign-in page
-  if (!session) {
-    redirect('/sign-in');
-  }
 
   return (
     <div className="h-auto w-full py-12 flex justify-center items-center
