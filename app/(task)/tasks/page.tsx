@@ -25,7 +25,7 @@ function Tasks({ taskData }: { taskData: TaskData }) {
   )
 }
 
-export default async function Transactions() {
+export default async function AllTasks() {
 
   // get tasks
   const tasks = await GetTasks();
