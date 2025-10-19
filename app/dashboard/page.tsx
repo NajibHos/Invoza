@@ -96,7 +96,7 @@ export default async function Dashboard() {
         </div>
         <div className="h-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="h-auto w-full p-6 flex flex-col justify-center
-            items-start gap-6 rounded bg-card-light dark:bg-card"
+            items-start gap-6 rounded bg-stone-50 dark:bg-card"
           >
             <div className="h-auto w-full">
               <ChartNoAxesGantt
@@ -118,7 +118,7 @@ export default async function Dashboard() {
                 <p className="text-base font-heading font-medium
                   text-stone-700 dark:text-stone-300"
                 >
-                  Manage all your ongoing and completed projects
+                  Manage all your ongoing and completed projects.
                 </p>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default async function Dashboard() {
               <Link href={'/projects'}>
               <button
                 className="w-auto px-6 py-2 text-base font-text
-                font-medium rounded cursor-pointer text-white bg-active"
+                font-medium rounded cursor-pointer bg-active text-white"
               >
                 View
               </button>
@@ -156,7 +156,7 @@ export default async function Dashboard() {
                 <p className="text-base font-heading font-medium
                   text-stone-700 dark:text-stone-300"
                 >
-                  Generate, track, and manage invoices for your projects
+                  Generate, track, and manage invoices for your projects.
                 </p>
               </div>
             </div>
@@ -194,7 +194,7 @@ export default async function Dashboard() {
                 <p className="text-base font-heading font-medium
                   text-stone-700 dark:text-stone-300"
                 >
-                  Track, manage, and priotize tasks for your projects
+                  Track, manage, and priotize tasks for your projects.
                 </p>
               </div>
             </div>
