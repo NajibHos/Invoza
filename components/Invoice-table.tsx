@@ -41,7 +41,7 @@ type InvoiceType = {
 export default function InvoiceTable({ invoices }: {invoices: InvoiceType}) {
 
   const [isPending, startTransition] = useTransition();
-  
+
   const handleDelete = (id: string) => {
     startTransition(async () => {
       const res = await RemoveInvoice(id);
@@ -120,14 +120,17 @@ export default function InvoiceTable({ invoices }: {invoices: InvoiceType}) {
               </Link>
             </TableCell>
             <TableCell className="text-center">
+              {/* invoice download button component */}
               <InvoicePdfButton invoice={invoice} />
             </TableCell>
             <TableCell className="text-right">
               <button
                 onClick={() => handleDelete(invoice.id)}
                 disabled={isPending}
-                className="px-3 py-2 text-white bg-red-600 rounded
-                disabled:bg-red-500 cursor-pointer"
+                className="px-3 py-2 cursor-pointer rounded bg-stone-300
+                dark:bg-stone-700 text-stone-900 dark:text-white
+                disabled:bg-stone-200 disabled:dark:bg-stone-800
+                disabled:cursor-not-allowed"
               >
                 <Trash2 size={18} />
               </button>
