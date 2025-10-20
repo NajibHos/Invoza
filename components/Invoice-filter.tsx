@@ -30,8 +30,8 @@ export default function InvoiceFilter() {
           onClick={() => handleFilters('Paid')}
           disabled={isPending}
           className="w-auto px-6 py-2 text-base font-text font-medium
-          rounded cursor-pointer  text-green-600 disabled:text-green-500
-          bg-card-light dark:bg-card"
+          rounded cursor-pointer text-stone-900 dark:text-white
+          disabled:cursor-not-allowed bg-card-light dark:bg-card"
         >
           Paid
         </button>
@@ -41,8 +41,8 @@ export default function InvoiceFilter() {
           onClick={() => handleFilters('Pending')}
           disabled={isPending}
           className="w-auto px-6 py-2 text-base font-text font-medium
-          rounded cursor-pointer  text-blue-600 disabled:text-blue-500
-          bg-card-light dark:bg-card"
+          rounded cursor-pointer text-stone-900 dark:text-white
+          disabled:cursor-not-allowed bg-card-light dark:bg-card"
         >
           Pending
         </button>
@@ -52,8 +52,8 @@ export default function InvoiceFilter() {
           onClick={() => handleFilters('Unpaid')}
           disabled={isPending}
           className="w-auto px-6 py-2 text-base font-text font-medium
-          rounded cursor-pointer text-red-600 disabled:text-red-500
-          bg-card-light dark:bg-card"
+          rounded cursor-pointer text-stone-900 dark:text-white
+          disabled:cursor-not-allowed bg-card-light dark:bg-card"
         >
           Unpaid
         </button>
@@ -62,8 +62,8 @@ export default function InvoiceFilter() {
         <button
           onClick={resetFilters}
           className="w-auto px-6 py-2 text-base font-text font-medium
-          text-stone-900 dark:text-white bg-card-light dark:bg-card
-          rounded cursor-pointer"
+          rounded cursor-pointer text-stone-900 dark:text-white
+          disabled:cursor-not-allowed bg-card-light dark:bg-card"
         >
           Reset
         </button>

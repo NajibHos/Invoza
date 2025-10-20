@@ -99,7 +99,8 @@ export default function InvoicePdfButton({ invoice }: { invoice: InvoiceType }) 
   return (
     <button
       onClick={handleDownload}
-      className="px-3 py-2 text-white bg-active rounded cursor-pointer"
+      className="px-3 py-2 rounded cursor-pointer bg-stone-300
+      dark:bg-stone-700 text-stone-900 dark:text-white"
     >
       <Download size={18} />
     </button>
