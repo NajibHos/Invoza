@@ -128,7 +128,8 @@ export default function TaskCard({id, title, priority, status}: TaskType) {
           onClick={() => handleDelete(id)}
           disabled={isPending}
           className="w-auto px-3 py-1 text-base font-text font-medium
-          rounded cursor-pointer text-white bg-red-600 disabled:bg-red-500"
+          rounded cursor-pointer text-stone-900 dark:text-white
+          bg-stone-300 dark:bg-stone-700 disabled:cursor-not-allowed"
         >
           Remove
         </button>
