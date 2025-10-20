@@ -77,7 +77,8 @@ export default function ProjectCard({ id, title, description, status }: ProjectD
             onClick={() => handleDelete(id)}
             disabled={isPending}
             className="w-auto px-3 py-1 text-base font-text font-medium
-            rounded cursor-pointer text-white bg-red-600 disabled:bg-red-500"
+            rounded cursor-pointer bg-stone-300 dark:bg-stone-700
+            text-stone-900 dark:text-white"
           >
             Remove
           </button>
