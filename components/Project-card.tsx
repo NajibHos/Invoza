@@ -66,7 +66,7 @@ export default function ProjectCard({ id, title, description, status }: ProjectD
           <Link href={`/projects/view-project/${id}`}>
           <button
             className="w-auto px-3 py-1 text-base font-text font-medium
-            rounded cursor-pointer text-white bg-blue-600"
+            rounded cursor-pointer text-white bg-active"
           >
             View
           </button>
