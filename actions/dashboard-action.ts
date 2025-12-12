@@ -82,19 +82,25 @@ export async function GetMonthlyIncomeChartData(userID: string) {
   const now = new Date();
   const months = Array.from({length: 6}, (_, i) => {
     const date = new Date(now.getFullYear(), now.getMonth() - (5 - i), 1);
-    return {year: date.getFullYear(), month: date.getMonth() + 1,
-      label: date.toLocaleString('default', {month: 'short'})};
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      label: date.toLocaleString('default', {month: 'short'})
+    };
   })
 
   try {
     const res = await Promise.all(months.map(async ({year, month, label}) => {
+      const start = new Date(year, month - 1, 1);
+      const end = new Date(year, month, 1); // safe rollover to next month
+
       const aggregate = await prisma.invoice.aggregate({
         _sum: { total: true },
         where: {
           status: 'Paid',
           createdAt: {
-            gte: new Date(`${year}-${month}-01`),
-            lt: new Date(`${year}-${month + 1}-01`)
+            gte: start,
+            lt: end
           },
           userId: userID
         }
@@ -107,6 +113,7 @@ export async function GetMonthlyIncomeChartData(userID: string) {
     return res;
   } catch (error) {
     console.error(error);
+    return [];
   }
 }
 
