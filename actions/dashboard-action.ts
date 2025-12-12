@@ -5,8 +5,10 @@ import prisma from "@/lib/prisma/prisma";
 export async function GetIncomeThisMonth(userID: string) {
 
   const now = new Date();
-  const month = now.getMonth() + 1;
+  const monthIndex = now.getMonth(); // zero-based
   const year = now.getFullYear();
+  const start = new Date(year, monthIndex, 1);
+  const end = new Date(year, monthIndex + 1, 1); // safe rollover
 
   try {
     const res = await prisma.invoice.aggregate({
@@ -14,8 +16,8 @@ export async function GetIncomeThisMonth(userID: string) {
       where: {
         status: 'Paid',
         createdAt: {
-          gte: new Date(`${year}-${month}-01`),
-          lt: new Date(`${year}-${month + 1}-01`)
+          gte: start,
+          lt: end
         },
         userId: userID
       }
@@ -24,6 +26,7 @@ export async function GetIncomeThisMonth(userID: string) {
     return res._sum.total ?? 0;
   } catch (error) {
     console.error(error);
+    return 0;
   }
 }
 
