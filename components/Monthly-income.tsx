@@ -20,7 +20,7 @@ export default async function MonthlyIncomeCard({ userId }: { userId: string}) {
           <h2 className="text-2xl font-text font-medium
             text-stone-900 dark:text-white"
           >
-            {`$${total || '$0'}`}
+            {`$${total || '0'}`}
           </h2>
         </div>
       </div>
