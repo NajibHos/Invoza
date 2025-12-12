@@ -13,11 +13,11 @@ export default async function IncomeChartCard({ userId }: { userId: string }) {
               <h2 className="text-lg font-text font-medium
                 text-stone-700 dark:text-stone-300"
               >
-                Monthly Income Chart
+                Income trends
               </h2>
             </div>
             <div className="h-auto w-full">
-                <IncomeChart data={chartData} />
+              <IncomeChart data={chartData ?? []} />
             </div>
         </div>
     )
